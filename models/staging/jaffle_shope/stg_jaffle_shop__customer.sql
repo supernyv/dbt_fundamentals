@@ -4,4 +4,4 @@ select
     last_name
 
 from
-    raw.jaffle_shop.customer
+    {{source("jaffle_shop", "customer")}}
