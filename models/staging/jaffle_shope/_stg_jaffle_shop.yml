@@ -1,0 +1,28 @@
+models :
+  - name : stg_jaffle_shop__customer
+    description : "Staging model for the jaffle_shop.customer source table"
+    columns :
+      - name : customer_id
+        data_tests:
+          - unique
+          - not_null 
+  - name : stg_jaffle_shop__customer_order
+    description : "Staging model for the jaffle_shop.customer_order source table"
+    columns :
+      - name : order_id
+        data_tests :
+          - unique 
+          - not_null
+      
+      - name : status 
+        data_tests:
+        - accepted_values :
+            arguments :
+              values : ["placed", "shipped", "completed", "returned", "return_pending"]
+      
+      - name : customer_id
+        data_tests:
+        - relationships:
+            arguments:
+              to : ref("stg_jaffle_shop_customer")
+              field : customer_id
