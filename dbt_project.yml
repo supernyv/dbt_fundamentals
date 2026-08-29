@@ -31,7 +31,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  jaffle_shop:
+  jaffle_shop: # Project name (from `name:` in dbt_project.yml)
     staging:
       +materialized: view
     marts:
