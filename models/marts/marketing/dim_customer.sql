@@ -30,6 +30,10 @@ select
     customer_order_summary.first_order_date,
     customer_order_summary.most_recent_order_date,
     coalesce(customer_order_summary.number_of_orders, 0) as number_of_orders,
+    case 
+        when coalesce(customer_order_summary.number_of_orders, 0) > 3 then 'high'
+        else 'low'
+    end as order_amount_category,
     coalesce(customer_spending.lifetime_spending, 0) as lifetime_spending
 from 
     {{ref("stg_jaffle_shop__customer")}} as customer
