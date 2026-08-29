@@ -1,26 +1,29 @@
 models :
   - name : stg_jaffle_shop__customer
-    description : "Staging model for the jaffle_shop.customer source table"
+    description : Staging model for the jaffle_shop.customer source table. One unique customer per row
     columns :
       - name : customer_id
+        description : The primary key for the customer.
         data_tests:
           - unique
           - not_null 
   - name : stg_jaffle_shop__customer_order
-    description : "Staging model for the jaffle_shop.customer_order source table"
+    description : Staging model for the jaffle_shop.customer_order source table.
     columns :
       - name : order_id
         data_tests :
           - unique 
           - not_null
       
-      - name : status 
+      - name : status
+        description : '{{doc("order_status")}}'
         data_tests:
         - accepted_values :
             arguments :
               values : ["placed", "shipped", "completed", "returned", "return_pending"]
       
       - name : customer_id
+        description : The foreign key referencing the customer.
         data_tests:
         - relationships:
             arguments:
